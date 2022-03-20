@@ -1,65 +1,30 @@
 pipeline {
-   agent any
-   environment {
-       registry = "magalixcorp/k8scicd"
-       GOCACHE = "/tmp"
-   }
-   stages {
-       stage('Build') {
-           agent {
-               docker {
-                   image 'golang'
-               }
-           }
-           steps {
-               // Create our project directory.
-               sh 'cd ${GOPATH}/src'
-               sh 'mkdir -p ${GOPATH}/src/hello-world'
-               // Copy all files in our Jenkins workspace to our project directory.               
-               sh 'cp -r ${WORKSPACE}/* ${GOPATH}/src/hello-world'
-               // Build the app.
-               sh 'go build'              
-           }    
-       }
-       stage('Test') {
-           agent {
-               docker {
-                   image 'golang'
-               }
-           }
-           steps {                
-               // Create our project directory.
-               sh 'cd ${GOPATH}/src'
-               sh 'mkdir -p ${GOPATH}/src/hello-world'
-               // Copy all files in our Jenkins workspace to our project directory.               
-               sh 'cp -r ${WORKSPACE}/* ${GOPATH}/src/hello-world'
-               // Remove cached test results.
-               sh 'go clean -cache'
-               // Run Unit Tests.
-               sh 'go test ./... -v -short'           
-           }
-       }
-       stage('Publish') {
-           environment {
-               registryCredential = 'dockerhub'
-           }
-           steps{
-               script {
-                   def appimage = docker.build registry + ":$BUILD_NUMBER"
-                   docker.withRegistry( '', registryCredential ) {
-                       appimage.push()
-                       appimage.push('latest')
-                   }
-               }
-           }
-       }
-       stage ('Deploy') {
-           steps {
-               script{
-                   def image_id = registry + ":$BUILD_NUMBER"
-                   sh "ansible-playbook  playbook.yml --extra-vars \"image_id=${image_id}\""
-               }
-           }
-       }
-   }
+    agent any
+    // We split the work into 3 stages:
+    stages {
+        // 1. Checkout the files from Git
+        stage ('Prep') {
+            steps {
+                checkout scm
+            }
+        }
+        // 2. Check if 'my-code.c' exists, 
+        stage ('Build') {
+            steps {
+                script {
+                    if (fileExists('my-code.c') == false) {
+                        unstable('Code file not found!')
+                    }
+                }
+            }
+        }
+        // 3. Dummy deploy
+        // Print a message (only done if the build is stable)
+        stage ('Deploy') {
+            when { not { equals expected: 'UNSTABLE
+            steps {
+                echo 'Deploying it gently...'
+            }
+        }
+    }
 }
