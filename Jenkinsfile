@@ -12,7 +12,8 @@ pipeline {
         stage ('Build') {
             steps {
                 script {
-                  echo 'Building'
+                    echo 'Doing Docker build'
+                    docker build -t charlesparasa/go-hello-world:v1 .
                 }
             }
         }
