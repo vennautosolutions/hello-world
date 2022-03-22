@@ -1,10 +1,11 @@
 pipeline {
     agent any
     // We split the work into 3 stages:
-   node("my-agent"){
+   
     
     stages {
         // 1. Checkout the files from Git
+       node("my-agent"){
         stage ('Git Checkout') {
             steps {
                 checkout scm
@@ -26,6 +27,7 @@ pipeline {
                 echo 'Deploying it gently...'
             }
         }
+       }
     }
-   }
+   
 }
