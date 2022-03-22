@@ -12,7 +12,7 @@ pipeline {
         stage ('Build') {
             steps {
                 script {
-                    echo 'Doing Docker build'
+                    pwd
                     docker build -t charlesparasa/go-hello-world:v1 .
                 }
             }
