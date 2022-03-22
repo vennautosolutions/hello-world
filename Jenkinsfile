@@ -13,7 +13,7 @@ pipeline {
             steps {
                 script {
                     pwd
-                    docker build -t charlesparasa/go-hello-world:v1 .
+                    docker build -t go-hello-world:v1 .
                 }
             }
         }
