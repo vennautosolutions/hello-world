@@ -1,6 +1,8 @@
 pipeline {
-    agent docker
+    agent any
     // We split the work into 3 stages:
+   node("my-agent"){
+    
     stages {
         // 1. Checkout the files from Git
         stage ('Git Checkout') {
@@ -25,4 +27,5 @@ pipeline {
             }
         }
     }
+   }
 }
