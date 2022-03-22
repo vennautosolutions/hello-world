@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent my-agent
     // We split the work into 3 stages:
     stages {
         // 1. Checkout the files from Git
