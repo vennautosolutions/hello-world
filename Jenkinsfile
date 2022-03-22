@@ -12,7 +12,7 @@ pipeline {
         stage ('Build') {
             steps {
                 script {
-                    pwd
+                    "pwd"
                     "docker build -t go-hello-world:v1 ."
                 }
             }
