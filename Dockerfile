@@ -1,10 +1,17 @@
-FROM golang:alpine AS build-env
-RUN mkdir /go/src/app && apk update && apk add git
-ADD main.go /go/src/app/
-WORKDIR /go/src/app
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-extldflags "-static"' -o app .
+# syntax=docker/dockerfile:1
 
-FROM scratch
+FROM golang:1.16-alpine
+
 WORKDIR /app
-COPY --from=build-env /go/src/app/app .
-ENTRYPOINT [ "./app" ]
+
+COPY go.mod ./
+COPY go.sum ./
+RUN go mod download
+
+COPY *.go ./
+
+RUN go build -o /docker-gs-ping
+
+EXPOSE 8080
+
+CMD [ "/docker-gs-ping" ]
