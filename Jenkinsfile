@@ -12,8 +12,8 @@ pipeline {
         stage ('Build') {
             steps {
                 script {
-                    "pwd"
-                    "docker build -t go-hello-world:v1 ."
+                    sh 'pwd'
+                    sh 'docker build -t go-hello-world:v1 .'
                 }
             }
         }
