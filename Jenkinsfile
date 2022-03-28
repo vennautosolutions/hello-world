@@ -21,6 +21,13 @@ pipeline {
                 }
             }
         }
+        stage ('Push') {
+            steps {
+              script {
+                        docker push -t charlesparasa/go-hello-world:v1 .
+                      }
+                   }
+         }
         // 3. Dummy deploy
         // Print a message (only done if the build is stable)
         stage ('Deploy') {
