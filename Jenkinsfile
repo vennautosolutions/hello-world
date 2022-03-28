@@ -1,8 +1,8 @@
 pipeline {
-    agent any
-   // agent {
-   //    label 'my-agent'
-    //}
+//agent any
+    agent {
+       label 'my-agent'
+    }
     // We split the work into 3 stages:
    
     
