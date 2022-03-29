@@ -29,7 +29,7 @@ spec:
         - name: hello-world
           securityContext:
             {}
-          image: "charlesparasa/go-hello-world:v1"
+          image: "charlesparasa/go-hello-world:v5"
           imagePullPolicy: Always
           ports:
             - name: http
