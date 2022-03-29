@@ -41,7 +41,7 @@ pipeline {
         stage ('Deploy') {
             steps {
                 echo 'Deploying it gently...'
-                sh 'kubectl apply -f deployment/'
+                sh 'sudo kubectl apply -f deployment/'
             }
         }
        
