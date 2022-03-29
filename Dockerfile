@@ -1,4 +1,4 @@
 FROM ubuntu:latest
 COPY . .
-EXPOSE 8081
+EXPOSE 8080
 ENTRYPOINT [ "./main" ]
