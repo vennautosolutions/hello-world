@@ -25,14 +25,14 @@ pipeline {
             steps {
                 script {
                     sh 'pwd'
-                    sh 'docker build -t go-hello-world:v1 .'
+                    sh 'docker build -t go-hello-world:v5 .'
                 }
             }
         }
         stage ('Push') {
             steps {
               script {
-                        sh 'docker push charlesparasa/go-hello-world:v1'
+                        sh 'docker push charlesparasa/go-hello-world:v5'
                       }
                    }
          }
