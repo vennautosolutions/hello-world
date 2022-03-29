@@ -13,6 +13,13 @@ pipeline {
                 checkout scm
             }
         }
+        stage ('go Build') {
+            steps {
+                script {
+                    sh 'go build main.go'
+                }
+            }
+        }
         // 2. Check if 'my-code.c' exists, 
         stage ('Build') {
             steps {
