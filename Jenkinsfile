@@ -32,7 +32,7 @@ pipeline {
         stage ('Push') {
             steps {
               script {
-                        sh 'docker push -t charlesparasa/go-hello-world:v1'
+                        sh 'docker push charlesparasa/go-hello-world:v1'
                       }
                    }
          }
