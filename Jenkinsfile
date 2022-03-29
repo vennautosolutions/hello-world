@@ -25,7 +25,7 @@ pipeline {
             steps {
                 script {
                     sh 'pwd'
-                    sh 'docker build -t go-hello-world:v5 .'
+                    sh 'docker build -t charlesparasa/go-hello-world:v5 .'
                 }
             }
         }
